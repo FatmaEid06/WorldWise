@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "./City.module.css";
 import { useEffect } from "react";
 import { useCities } from "../Contexts/CitiesContext";
@@ -26,15 +26,11 @@ function City() {
   const { id } = useParams();
   const { getCity, currentCity, isLoading } = useCities();
 
-  const [seachParams, setSearchParams] = useSearchParams();
-  const lat = seachParams.get("lat");
-  const lng = seachParams.get("lng");
-
   useEffect(
     function () {
       getCity(id);
     },
-    [id],
+    [id, getCity],
   );
 
   const { cityName, emoji, date, notes } = currentCity;
